@@ -1,7 +1,7 @@
 import json
 import time
 import pathlib
-from authentication.auth import save_token
+from authentication.service_principal import save_token
 
 does_exist = pathlib.Path('configs/credentials.json').exists()
 
@@ -10,7 +10,7 @@ def fetch_token():
         with open('configs/credentials.json', 'r') as file:
             data = json.load(file)
         #determine if token has expired or not
-        expires_in = data['expire_in'] - time.time()
+        expires_in = data['expires_in'] - time.time()
         if expires_in < 100:
             return 0
         else:
