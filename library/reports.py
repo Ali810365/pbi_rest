@@ -1,8 +1,8 @@
 import requests
 from datetime import datetime, timedelta
-from modules.date_conversion import FormateDate
-from modules.login import headers
-from modules.requests import audit_requests
+from library.date_conversion import FormateDate
+from library.login import headers
+from library.requests import audit_requests
 
 class Reports():
     def __init__(self):

@@ -2,4 +2,4 @@ from library.groups import Groups
 
 groups = Groups()
 
-print(groups.get_groups(1))
+print(groups.get_groups(20))

@@ -93,6 +93,24 @@ class User():
         with open('configs/credentials.json', 'w') as f:
             f.write(json.dumps(token_dict, indent=2))
 
+    def silent_login(self, refresh_token):
+        token_dict = self.client_app.acquire_token_by_refresh_token(
+            refresh_token=refresh_token,
+            scopes=self.scope
+        )
+
+        if not 'error' in token_dict:
+            token_dict['expires_in'] = time.time() + int(token_dict['expires_in'])
+            token_dict['ext_expires_in'] = time.time() + int(token_dict['ext_expires_in'])
+            token_dict['auth_type'] = "user"
+
+            with open('configs/credentials.json', 'w') as f:
+                f.write(json.dumps(token_dict, indent=2))
+            
+            return token_dict
+        else:
+            return token_dict
+
 class ServicePrincipal():
     
     def __init__(

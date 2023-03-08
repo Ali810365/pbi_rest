@@ -1,56 +1,59 @@
 import requests
 from requests.adapters import HTTPAdapter, Retry
-from library.login import headers
+from library.login import headers, authenticated
 
 def audit_requests(endpoint, method, params = None, data = None, json = None):
-        base_url = 'https://api.powerbi.com/v1.0/myorg/'
+        if not authenticated():
+             return "\nPlease configure Authentication"
+        else:
+            base_url = 'https://api.powerbi.com/v1.0/myorg/'
 
-        url = base_url + endpoint
+            url = base_url + endpoint
 
-        session = requests.session()
+            session = requests.session()
 
-        """ 
-        re_attempt = Retry(
-                    total=5,
-                    backoff_factor=0.1,
-                    status_forcelist=[ 500, 502, 503, 504 ]
-                )
+            """ 
+            re_attempt = Retry(
+                        total=5,
+                        backoff_factor=0.1,
+                        status_forcelist=[ 500, 502, 503, 504 ]
+                    )
 
-        session.mount('http://', HTTPAdapter(max_retries=re_attempt)) 
-        """
+            session.mount('http://', HTTPAdapter(max_retries=re_attempt)) 
+            """
 
-        new_request = requests.Request(
-            method=method.upper(),
-            headers=headers,
-            url=url,
-            params=params,
-            data=data,
-            json=json,
-        ).prepare()
+            new_request = requests.Request(
+                method=method.upper(),
+                headers=headers,
+                url=url,
+                params=params,
+                data=data,
+                json=json,
+            ).prepare()
 
-        response: requests.Response = session.send(
-            request=new_request
-        )
+            response: requests.Response = session.send(
+                request=new_request
+            )
 
-        session.close()
+            session.close()
 
-        try:
-            if response.ok and len(response.content) > 0 and response.headers['Content-Type'] != 'application/zip':
+            try:
+                if response.ok and len(response.content) > 0 and response.headers['Content-Type'] != 'application/zip':
+                
+                    return response.json()
             
-                return response.json()
-        
-            elif response.ok and len(response.content) > 0 and response.headers['Content-Type'] == 'application/zip':
+                elif response.ok and len(response.content) > 0 and response.headers['Content-Type'] == 'application/zip':
 
-                return response.content
+                    return response.content
 
-            elif len(response.content) > 0 and response.ok:
+                elif len(response.content) > 0 and response.ok:
 
-                return {
-                    'message': 'response successful',
-                    'status_code': response.status_code
-                }
-            elif not response.ok:
-                return response.status_code
+                    return {
+                        'message': 'response successful',
+                        'status_code': response.status_code
+                    }
+                elif not response.ok:
+                    return response.text
 
-        except KeyError as e:
-            return e
+            except KeyError as e:
+                return e

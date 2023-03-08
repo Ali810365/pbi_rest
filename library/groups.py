@@ -1,12 +1,12 @@
 import requests
 from requests.adapters import HTTPAdapter, Retry
-from library.login import headers
 from library.requests import audit_requests
 
 class Groups():
     def __init__(self):
         #self.access_token = access_token
-        self.headers = headers
+        #self.headers = headers
+        pass
     
     """ def audit_requests(self, endpoint, method, params = None, data = None, json = None):
         base_url = 'https://api.powerbi.com/v1.0/myorg/'
