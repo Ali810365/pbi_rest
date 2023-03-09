@@ -39,11 +39,12 @@ def audit_requests(endpoint, method, params = None, data = None, json = None):
 
             try:
                 if response.ok and len(response.content) > 0 and response.headers['Content-Type'] != 'application/zip':
-                
+                    
                     return response.json()
             
                 elif response.ok and len(response.content) > 0 and response.headers['Content-Type'] == 'application/zip':
 
+                    print('It\'s this one ', response.headers)
                     return response.content
 
                 elif len(response.content) > 0 and response.ok:
@@ -52,8 +53,21 @@ def audit_requests(endpoint, method, params = None, data = None, json = None):
                         'message': 'response successful',
                         'status_code': response.status_code
                     }
+
+                elif response.ok and len(response.content) == 0:
+
+                    return {
+                        'message': 'response successful',
+                        'status_code': response.status_code
+                    }
+
                 elif not response.ok:
-                    return response.text
+
+                    return {
+                        'status_code': response.status_code,
+                        'message': response.text
+                    }
+
 
             except KeyError as e:
                 return e

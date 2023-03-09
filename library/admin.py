@@ -73,7 +73,7 @@ class Admin():
             principalType: The principal type Options: User, App, Group
         
         >>> Example:
-            admin.add_users("3b5ca243-47d1-4be5-ac56-57c62291607d", "Admin", "john@contoso.com", "User")
+            admin.add_user("3b5ca243-47d1-4be5-ac56-57c62291607d", "Admin", "john@contoso.com", "User")
         
         '''
         endpoint = f"admin/groups/{groupId}/users"
