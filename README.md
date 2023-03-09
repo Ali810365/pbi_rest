@@ -15,6 +15,13 @@
 - [Developer Center](https://powerbi.microsoft.com/en-us/developers/)
 
 ## Requirements
+
+
+## Getting Started
+```
+git clone https://github.com/Ali810365/pbi_rest
+```
+
 ### Python 3
 
 MSAL
@@ -25,10 +32,6 @@ The Microsoft Authentication Library for Python enables applications to integrat
 pip install msal
 ```
 
-## Getting Started
-```
-git clone https://github.com/Ali810365/pbi_rest
-```
 
 ## Configuration
 
