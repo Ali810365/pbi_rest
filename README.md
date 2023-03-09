@@ -5,7 +5,7 @@
 - [References](#References)
 - [Getting Started](#getting-started)
 - [Samples](#Samples)
-- [Support These Projects](#support-these-projects)
+
 
 ## References
 
@@ -15,7 +15,7 @@
 - [Developer Center](https://powerbi.microsoft.com/en-us/developers/)
 
 ## Requirements
-Python 3
+### Python 3
 
 MSAL
 

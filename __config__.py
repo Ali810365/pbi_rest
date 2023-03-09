@@ -15,12 +15,6 @@ config.set('credentials', 'application_id', '') #application id goes in between 
 config.set('credentials', 'application_secret', '') #application secret goes in between the quotes
 config.set('credentials', 'tenant_id', '') #tenant id goes in between the quotes
 
-config.add_section('username')
-config.set('username', 'application_id', '') #application id goes in between the quotes
-config.set('username', 'user_name', '') #application secret goes in between the quotes
-config.set('username', 'password', '') #tenant id goes in between the quotes
-
-
 # Write to a config.ini file.
 with open(file='configs/config.ini', mode='w+') as f:
     config.write(f)
