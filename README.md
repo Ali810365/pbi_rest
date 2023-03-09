@@ -46,7 +46,7 @@ from library.groups import Groups
 from library.reports import Reports
 from library.datasets import Datasets
 from library.dashboards import Dashboards
-from library.admin import Admin()
+from library.admin import Admin
 
 groups = Groups()
 reports = Reports()
