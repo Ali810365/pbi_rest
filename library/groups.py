@@ -9,9 +9,10 @@ class Groups():
         #self.headers = headers
         pass
     
-    def add_user(self, groupId:str, groupUserAccessRight:str, identifier:str, principalType:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/groups/add-group-user 
-        ''' Grants user permissions to the specified workspace
+    def add_user(self, groupId:str, groupUserAccessRight:str, identifier:str, principalType:str): 
+        '''https://learn.microsoft.com/en-us/rest/api/power-bi/groups/add-group-user
+        
+        Grants user permissions to the specified workspace
 
         >>> Params:
             groupId: The workspace ID
@@ -41,9 +42,10 @@ class Groups():
         
         return response
     
-    def create_group(self, name, workspaceV2=True):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/groups/create-group
-        ''' Create a workspace
+    def create_group(self, name:str, workspaceV2=True):
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/groups/create-group
+        
+        Create a workspace
 
         >>> Params:
             workspaceV2: (Preview feature) Whether to create a workspace. The only supported value is true.
@@ -62,9 +64,10 @@ class Groups():
 
         return response
     
-    def delete_group(self, group_id):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/groups/delete-group
-        ''' Deletes the specified workspace
+    def delete_group(self, group_id:str):
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/groups/delete-group
+        
+        Deletes the specified workspace
 
         >>> Params:
             group_id: The workspace ID of the to be deleted workspace
@@ -81,9 +84,10 @@ class Groups():
 
         return response
     
-    def delete_user(self, group_id, user=None, profileID=None):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/groups/delete-user-in-group
-        ''' Deletes the specified user permissions from the specified workspace
+    def delete_user(self, group_id:str, user=None, profileId=None):
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/groups/delete-user-in-group
+        
+        Deletes the specified user permissions from the specified workspace
 
         >>> Params:
             group_id: The workspace ID of the to be deleted workspace
@@ -94,9 +98,12 @@ class Groups():
         '''
         endpoint = f"groups/{group_id}/users/{user}"
 
+        if(profileId):
+            endpoint = f"groups/{group_id}/users/{user}?profileId={profileId}"
+
         body = {
             "user": user,
-            "profileID": profileID
+            "profileID": profileId
         }
 
         method = "delete"
@@ -106,18 +113,21 @@ class Groups():
         return response
     
 
-    def get_users(self, group_id:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/groups/get-group-users
-        ''' Returns a list of users that have access to the specified workspace
+    def get_users(self, group_id:str, top:int=1000, skip=0):
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/groups/get-group-users
+
+        Returns a list of users that have access to the specified workspace
 
         >>> Params:
             group_id: The workspace ID
+            top: Returns only the first n results
+            skip: Skips the first n results
         
         >>> Example:
             groups.get_users('f089354e-8366-4e18-aea3-4cb4a3a50b48')
         
         '''
-        endpoint = f"groups/{group_id}/users"
+        endpoint = f"groups/{group_id}/users?$top={top}&$skip={skip}"
 
         method = 'get'
 
@@ -126,9 +136,10 @@ class Groups():
         return response
 
 
-    def get_groups(self, top:int):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/groups/get-groups 
-        ''' Returns a list of workspaces the user has access to
+    def get_groups(self, top:int, skip=0, filter=None): #contains(name,'Intune Compliance Data Warehouse App') 
+        '''https://learn.microsoft.com/en-us/rest/api/power-bi/groups/get-groups
+        
+        Returns a list of workspaces the user has access to
 
         >>> Params:
             top: Returns only the first n results
@@ -137,8 +148,11 @@ class Groups():
             groups.get_groups(100)
         
         '''
-        endpoint = f"groups?$top={top}"
+        endpoint = f"groups?$top={top}&$skip={skip}"
 
+        if(filter):
+            endpoint = f"groups?$filter={filter}&$top={top}&$skip={skip}"
+        
         method = 'get'
         
         response = audit_requests(endpoint, method)
@@ -146,9 +160,10 @@ class Groups():
         return response
 
     
-    def update_user(self, groupId:str, groupUserAccessRight:str, identifier:str, principalType:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/groups/update-group-user 
-        ''' Updates the specified user permissions to the specified workspace
+    def update_user(self, groupId:str, groupUserAccessRight:str, identifier:str, principalType:str): 
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/groups/update-group-user
+
+        Updates the specified user permissions to the specified workspace
 
         >>> Params:
             groupId: The workspace ID
@@ -160,7 +175,6 @@ class Groups():
             group.add_user("3b5ca243-47d1-4be5-ac56-57c62291607d", "Admin", "john@contoso.com", "User")
         
         '''
-
         endpoint = f"groups/{groupId}/users"
 
         body = {

@@ -15,7 +15,7 @@ client = User(
     redirect_uri= 'https://localhost/redirect'
 )
 
-#client.login()
+client.login()
 
 with open('configs/credentials.json', 'r') as file:
     data = json.load(file)
