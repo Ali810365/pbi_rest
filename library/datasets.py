@@ -387,19 +387,19 @@ class Datasets():
         
         return response
     
-    def get_datasets_in_group(self, group_id:str): 
+    def get_datasets_in_group(self, groupId:str): 
         ''' https://learn.microsoft.com/en-us/rest/api/power-bi/datasets/get-datasets-in-group
         
         Returns a list of datasets from >>> the specified workspace
 
         >>> Params:
-            group_id: The group ID
+            groupId: The group ID
         
         >>> Example:
             >>> datasets.get_datasets_in_group('f089354e-8366-4e18-aea3-4cb4a3a50b48', 'cfafbeb1-8037-4d0c-896e-a46fb27ff229')
         
         '''
-        endpoint = f"groups/{group_id}/datasets"
+        endpoint = f"groups/{groupId}/datasets"
 
         method = 'get'
 
@@ -838,21 +838,21 @@ class Datasets():
         
         return response
 
-    def refresh_dataset_in_group(self, group_id:str, dataset_id:str):
+    def refresh_dataset_in_group(self, groupId:str, dataset_id:str):
         ''' https://learn.microsoft.com/en-us/rest/api/power-bi/datasets/refresh-dataset-in-group
         
             Triggers a refresh for the specified dataset from the specified workspace
             #Enhanced refresh is still work in progress
 
         >>> Params:
-            group_id: The group ID
+            groupId: The group ID
             dataset_id: The dataset ID
             
         >>> Example:
             >>> datasets.refresh_dataset_in_group('f089354e-8366-4e18-aea3-4cb4a3a50b48','cfafbeb1-8037-4d0c-896e-a46fb27ff229')
         
         '''
-        endpoint = f"groups/{group_id}/datasets/{dataset_id}/refreshes"
+        endpoint = f"groups/{groupId}/datasets/{dataset_id}/refreshes"
 
         method = 'post'
 
@@ -1186,11 +1186,11 @@ class Datasets():
         
         return response
     
-    def error_filter_refresh_history(self, group_id, dataset_id):
+    def error_filter_refresh_history(self, groupId, dataset_id):
         ''' Returns refresh history of a dataset in a workspace with errors filtered
 
         >>> Params:
-            group_id: workspace ID
+            groupId: workspace ID
             dataset_id: The dataset ID
         
         >>> Example:
@@ -1207,7 +1207,7 @@ class Datasets():
         no_history_dataset = {
             'value': [{'startTime': f'{invalid_dataset_old}'}]
         }
-        endpoint = f"groups/{group_id}/datasets/{dataset_id}/refreshes?$top=1"
+        endpoint = f"groups/{groupId}/datasets/{dataset_id}/refreshes?$top=1"
 
         method = 'get'
 
@@ -1229,11 +1229,11 @@ class Datasets():
             return []
            
 
-    def get_recent_dataset(self, group_id): 
+    def get_recent_dataset(self, groupId): 
         ''' Returns the most recently refreshed dataset from the specified workspace
 
         >>> Params:
-            group_id: workspace ID
+            groupId: workspace ID
         
         >>> Example:
             >>> datasets.error_filter_recent_dataset('cfafbeb1-8037-4d0c-896e-a46fb27ff229')
@@ -1243,7 +1243,7 @@ class Datasets():
 
         refresh_history = [] 
 
-        endpoint = f"groups/{group_id}/datasets"
+        endpoint = f"groups/{groupId}/datasets"
 
         method = 'get'
 
@@ -1251,7 +1251,7 @@ class Datasets():
         datasets = response['value']
         for dataset in datasets:
             if(dataset['name'] != 'Report Usage Metrics Model'):
-                for history in self.error_filter_refresh_history(group_id, dataset['id']): #get the refresh time of each dataset to determine the most recent refreshed dataset
+                for history in self.error_filter_refresh_history(groupId, dataset['id']): #get the refresh time of each dataset to determine the most recent refreshed dataset
                     #refresh_history.append([determine_difference_by.formateDate(history['startTime']), [dataset]])
                     refresh_history.append([determine_difference_by.formateDate(history['startTime']), [dataset]])
         
@@ -1260,11 +1260,11 @@ class Datasets():
         except:
             return []
 
-    def error_filter_recent_dataset(self, group_id):
+    def error_filter_recent_dataset(self, groupId):
         ''' Returns the most recently refreshed dataset from the specified workspace with errors filtered
 
         >>> Params:
-            group_id: workspace ID
+            groupId: workspace ID
         
         >>> Example:
             >>> datasets.error_filter_recent_dataset('cfafbeb1-8037-4d0c-896e-a46fb27ff229')
@@ -1274,7 +1274,7 @@ class Datasets():
 
         refresh_history = []
 
-        endpoint = f"groups/{group_id}/datasets"
+        endpoint = f"groups/{groupId}/datasets"
 
         method = 'get'
 
@@ -1285,7 +1285,7 @@ class Datasets():
         datasets = response['value']
         for dataset in datasets:
             if(dataset['name'] != 'Report Usage Metrics Model'):
-                for history in self.error_filter_refresh_history(group_id, dataset['id']): #get the refresh time of each dataset to determine the most recent refreshed dataset
+                for history in self.error_filter_refresh_history(groupId, dataset['id']): #get the refresh time of each dataset to determine the most recent refreshed dataset
                     #refresh_history.append([determine_difference_by.formateDate(history['startTime']), [dataset]])
                     refresh_history.append([determine_difference_by.formateDate(history['startTime']), [dataset]])
 
