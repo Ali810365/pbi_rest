@@ -2,13 +2,12 @@ from library.requests import audit_requests
 
 class Pipelines():
     def __init__(self):
-        #self.access_token = access_token
-        #self.headers = headers
         pass
     
     def assign_workspace(self, pipelineId:str, stageOrder:str, workspaceId:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/assign-workspace
-        ''' Assigns the specified workspace to the specified deployment pipeline stage
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/assign-workspace
+        
+        Assigns the specified workspace to the specified deployment pipeline stage
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -33,8 +32,9 @@ class Pipelines():
         return response
     
     def create_pipeline(self, displayName:str, description:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/create-pipeline
-        ''' Creates a new deployment pipeline
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/create-pipeline
+        
+        Creates a new deployment pipeline
 
         >>> Params:
             displayName: The display name for the new deployment pipeline
@@ -59,8 +59,9 @@ class Pipelines():
         return response
 
     def delete_pipeline(self, pipelineId:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/delete-pipeline
-        ''' Deletes the specified deployment pipeline
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/delete-pipeline
+        
+        Deletes the specified deployment pipeline
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -79,8 +80,9 @@ class Pipelines():
         return response
     
     def delete_pipeline_user(self, pipelineId:str, identifier:str,):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/delete-pipeline-user
-        ''' Removes user permissions from the specified deployment pipeline
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/delete-pipeline-user
+        
+        Removes user permissions from the specified deployment pipeline
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -100,8 +102,9 @@ class Pipelines():
         return response
     
     def deploy_all(self, pipelineId:str, sourceStageOrder:int):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/deploy-all
-        ''' Deploys all supported items from the source stage of the specified deployment pipeline
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/deploy-all
+        
+        Deploys all supported items from the source stage of the specified deployment pipeline
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -126,8 +129,9 @@ class Pipelines():
     
 
     def get_pipeline(self, pipelineId:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline
-        ''' Returns the specified deployment pipeline
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline
+        
+        Returns the specified deployment pipeline
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -146,8 +150,9 @@ class Pipelines():
         return response
     
     def get_pipeline_operation(self, pipelineId:str, operationId:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline-operation
-        ''' Returns the details of the specified deploy operation performed on the specified deployment pipeline, including the deployment execution plan
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline-operation
+        
+        Returns the details of the specified deploy operation performed on the specified deployment pipeline, including the deployment execution plan
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -167,8 +172,9 @@ class Pipelines():
         return response
     
     def get_pipeline_operations(self, pipelineId:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline-operations
-        ''' Returns a list of the up-to-20 most recent deploy operations performed on the specified deployment pipeline
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline-operations
+        
+        Returns a list of the up-to-20 most recent deploy operations performed on the specified deployment pipeline
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -186,8 +192,9 @@ class Pipelines():
         return response
     
     def get_pipeline_stage_artifacts(self, pipelineId:str, stageOrder:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline-stage-artifacts
-        ''' Returns the supported items from the workspace assigned to the specified stage of the specified deployment pipeline
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline-stage-artifacts
+        
+        Returns the supported items from the workspace assigned to the specified stage of the specified deployment pipeline
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -207,8 +214,9 @@ class Pipelines():
         return response
     
     def get_pipeline_stages(self, pipelineId:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline-stages
-        ''' Returns the stages of the specified deployment pipeline
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline-stages
+        
+        Returns the stages of the specified deployment pipeline
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -228,8 +236,9 @@ class Pipelines():
         return response
     
     def get_pipeline_users(self, pipelineId:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline-users
-        ''' Returns a list of users that have access to the specified deployment pipeline
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipeline-users
+        
+        Returns a list of users that have access to the specified deployment pipeline
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -248,8 +257,9 @@ class Pipelines():
         return response
     
     def get_pipelines(self):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipelines
-        ''' Returns a list of deployment pipelines that the user has access to
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/get-pipelines
+        
+        Returns a list of deployment pipelines that the user has access to
 
         >>> Params:
         
@@ -266,8 +276,9 @@ class Pipelines():
         return response
     
     def selective_deploy(self, pipelineId:str, sourceStageOrder:int):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/selective-deploy
-        ''' Deploys the specified items from the source stage of the specified deployment pipeline
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/selective-deploy
+        
+        Deploys the specified items from the source stage of the specified deployment pipeline
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -290,8 +301,9 @@ class Pipelines():
         return response
     
     def unassign_workspace(self, pipelineId:str, stageOrder:str):
-        #https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/unassign-workspace
-        ''' Unassigns the workspace from the specified stage in the specified deployment pipeline
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/unassign-workspace
+        
+        Unassigns the workspace from the specified stage in the specified deployment pipeline
 
         >>> Params:
             pipelineId: The deployment pipeline ID
@@ -316,7 +328,6 @@ class Pipelines():
         return response
     
     def update_pipeline(self, pipelineId:str, description:str, displayName:str):
-        
         ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/update-pipeline
         
         Updates the specified deployment pipeline.
@@ -344,8 +355,7 @@ class Pipelines():
         return response
     
     def update_pipeline_user(self, pipelineId:str, identifier:str, principalType:str, accessRight:str):
-        ''' 
-        https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/update-pipeline-user
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/pipelines/update-pipeline-user
 
         Grants user permissions to the specified deployment pipeline
         
