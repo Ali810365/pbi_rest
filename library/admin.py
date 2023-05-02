@@ -139,7 +139,9 @@ class Admin():
         return response
 
     def get_dashboards_subscriptions(self, dashboardId): 
-        ''' Returns a list of dashboard subscriptions along with subscriber details. This is a preview API call
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/admin/dashboards-get-dashboard-subscriptions-as-admin
+        
+        Returns a list of dashboard subscriptions along with subscriber details. This is a preview API call
 
         >>> Params:
             dashboardId: The dashboard ID
@@ -157,7 +159,9 @@ class Admin():
         return response
     
     def get_dashboards_users(self, dashboardId): 
-        ''' Returns a list of users that have access to the specified dashboard
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/admin/dashboards-get-dashboard-users-as-admin
+        
+        Returns a list of users that have access to the specified dashboard
 
         >>> Params:
             dashboardId: The dashboard ID
@@ -174,17 +178,31 @@ class Admin():
         
         return response
 
-    def get_dashboards(self): 
-        ''' Returns a list of dashboards for the organization
+    def get_dashboards(self, skip:int=0, top:int=5000, expand:str=None, filter:str=None): 
+        ''' https://learn.microsoft.com/en-us/rest/api/power-bi/admin/dashboards-get-dashboards-as-admin
+        
+        Returns a list of dashboards for the organization
 
         >>> Params:
-            
+            skip: Skips the first n results default value 0
+            top: Returns only the first n results, if not specified default value 5000
+            expand: Accepts a comma-separated list of data types, which will be expanded inline in the response. Supports tiles
+            filter: Filters the results, based on a boolean condition
         
         >>> Example:
-            admin.get_dashboards()
+            admin.get_dashboards(filter="contains(displayName, 'IT Spend Analysis Sample')")
         
         '''
-        endpoint = f"admin/dashboards"
+        endpoint = f"admin/dashboards?$skip={skip}&$top={top}"
+
+        if(expand):
+            endpoint = f"admin/dashboards?$expand={expand}&$skip={skip}&$top={top}"
+        if(filter):
+            endpoint = f"admin/dashboards?$filter={filter}&$skip={skip}&$top={top}"
+        if(filter and expand):
+            endpoint = f"admin/dashboards?$expand={expand}&$filter={filter}&$skip={skip}&$top={top}"
+
+        print(endpoint)
 
         method = 'get'
         
@@ -192,7 +210,7 @@ class Admin():
         
         return response
     
-    def get_dashboards_in_group(self, groupId): 
+    def get_dashboards_in_group(self, groupId, skip:int=0, top:int=5000, expand:str=None, filter:str=None): 
         ''' Returns a list of dashboards from the specified workspace
 
         >>> Params:
@@ -202,7 +220,11 @@ class Admin():
             admin.get_dashboards("3b5ca243-47d1-4be5-ac56-57c62291607d")
         
         '''
-        endpoint = f"admin/groups/{groupId}/dashboards"
+        endpoint = f"admin/groups/{groupId}/dashboards?$skip={skip}&$top={top}"
+        
+        if(filter):
+            endpoint = f"admin/groups/{groupId}/dashboards?$filter={filter}&$skip={skip}&$top={top}"
+        
 
         method = 'get'
         
